@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var textInput = document.getElementById('textInput');
     var pasteBtn = document.getElementById('pasteBtn');
     var processBtn = document.getElementById('processBtn');
+    var removeBracesBtn = document.getElementById('removeBracesBtn');
     var statusMsg = document.getElementById('statusMsg');
     var updatedText = document.getElementById('updatedText');
     var copyBtn = document.getElementById('copyBtn');
@@ -31,6 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return new_text;
     }
 
+    // Функция для удаления фигурных скобок
+    function removeBraces(text) {
+        return text.replace(/{|}/g, '');
+    }
+
     // Функция для вставки текста из буфера обмена
     pasteBtn.addEventListener('click', function() {
         navigator.clipboard.readText()
@@ -55,6 +61,14 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             statusMsg.textContent = 'Ошибка: Начальное значение и значение для увеличения должны быть числами';
         }
+    });
+
+    // Функция для удаления скобок и обновления текста
+    removeBracesBtn.addEventListener('click', function() {
+        var text = updatedText.textContent || textInput.value;
+        var updatedTextValue = removeBraces(text);
+        updatedText.textContent = updatedTextValue;
+        statusMsg.textContent = 'Все скобки {} удалены';
     });
 
     // Функция для копирования обработанного текста в буфер обмена

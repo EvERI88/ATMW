@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обновление тегов</title>
+    <link rel="stylesheet" href="style.css"> <!-- Подключаем файл стилей -->
+</head>
+<body>
+    <div class="container">
+        <h1>Обновление тегов</h1>
+        <label for="startValue">Начальное значение:</label>
+        <input type="text" id="startValue">
+        <label for="increment">Значение для увеличения:</label>
+        <input type="text" id="increment">
+        <label for="textInput">Текст для обработки:</label>
+        <textarea id="textInput" rows="10" cols="50"></textarea>
+        <button id="pasteBtn">Вставить из буфера обмена</button>
+        <button id="processBtn">Обработать текст</button>
+        <p id="statusMsg"></p>
+        <h2>Результат:</h2>
+        <pre id="updatedText" class="result-text"></pre>
+        <button id="copyBtn">Копировать в буфер обмена</button>
+    </div>
+
+    <script src="script.js"></script> <!-- Подключаем файл скриптов -->
+</body>
+</html>

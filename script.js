@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var pasteBtn = document.getElementById('pasteBtn');
     var processBtn = document.getElementById('processBtn');
     var removeBracesBtn = document.getElementById('removeBracesBtn');
+    var addBracesBtn = document.getElementById('addBracesBtn'); // Новая кнопка
     var statusMsg = document.getElementById('statusMsg');
     var updatedText = document.getElementById('updatedText');
     var copyBtn = document.getElementById('copyBtn');
@@ -35,6 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Функция для удаления фигурных скобок
     function removeBraces(text) {
         return text.replace(/{|}/g, '');
+    }
+
+    // Функция для добавления фигурных скобок вокруг "AT %MW..."
+    function addBraces(text) {
+        return text.replace(/(AT %MW\d+)/g, '{$1}');
     }
 
     // Функция для вставки текста из буфера обмена
@@ -69,6 +75,14 @@ document.addEventListener('DOMContentLoaded', function() {
         var updatedTextValue = removeBraces(text);
         updatedText.textContent = updatedTextValue;
         statusMsg.textContent = 'Все скобки {} удалены';
+    });
+
+    // Функция для добавления скобок и обновления текста
+    addBracesBtn.addEventListener('click', function() {
+        var text = updatedText.textContent || textInput.value;
+        var updatedTextValue = addBraces(text);
+        updatedText.textContent = updatedTextValue;
+        statusMsg.textContent = 'Скобки {} добавлены';
     });
 
     // Функция для копирования обработанного текста в буфер обмена

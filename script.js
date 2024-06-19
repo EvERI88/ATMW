@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var processBtn = document.getElementById('processBtn');
     var removeBracesBtn = document.getElementById('removeBracesBtn');
     var addBracesBtn = document.getElementById('addBracesBtn'); // Новая кнопка
+    var addBracesToAddressBtn = document.getElementById('addBracesToAddressBtn'); // Кнопка для добавления скобок к адресам
     var statusMsg = document.getElementById('statusMsg');
     var updatedText = document.getElementById('updatedText');
     var copyBtn = document.getElementById('copyBtn');
@@ -43,6 +44,13 @@ document.addEventListener('DOMContentLoaded', function() {
         return text.replace(/(AT %MW\d+)/g, '{$1}');
     }
 
+    // Функция для добавления фигурных скобок вокруг адресов
+    function addBracesToAddresses(text) {
+        // Регулярное выражение для поиска адресов (упрощённый пример)
+        var addressRegex = /\b\d{1,3}\s\w+\s(?:Street|St|Avenue|Ave|Boulevard|Blvd|Road|Rd|Lane|Ln)\b/g;
+        return text.replace(addressRegex, (match) => `{${match}}`);
+    }
+
     // Функция для вставки текста из буфера обмена
     pasteBtn.addEventListener('click', function() {
         navigator.clipboard.readText()
@@ -53,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Failed to read clipboard contents: ', err);
             });
     });
+    
 
     // Функция для обработки текста
     processBtn.addEventListener('click', function() {
@@ -83,6 +92,14 @@ document.addEventListener('DOMContentLoaded', function() {
         var updatedTextValue = addBraces(text);
         updatedText.textContent = updatedTextValue;
         statusMsg.textContent = 'Скобки {} добавлены';
+    });
+
+    // Функция для добавления скобок к адресам и обновления текста
+    addBracesToAddressBtn.addEventListener('click', function() {
+        var text = updatedText.textContent || textInput.value;
+        var updatedTextValue = addBracesToAddresses(text);
+        updatedText.textContent = updatedTextValue;
+        statusMsg.textContent = 'Скобки {} добавлены к адресам';
     });
 
     // Функция для копирования обработанного текста в буфер обмена
